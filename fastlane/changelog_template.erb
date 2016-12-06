@@ -2,7 +2,7 @@
   labels_map = {}
   labels_map['feature'] = 'Features'
   labels_map['bug'] = 'Bugs'
-  labels_map['optimization'] = 'Optimizations'
+  labels_map['enhancement'] = 'Enhancement'
 
   skip_release_notes_label = @labels.select {|label| label.name == "skip release notes" }.first
   changelog_url_base = "https://github.com/#{@params[:github_project]}/compare/"
@@ -36,7 +36,7 @@
 <% release.data.each do |label, pull_requests| -%>
 **<%= labels_map[label.name] %>:**
 <% for pr in pull_requests -%>
-- <%= pr.title %> | [#<%= pr.number %>](<%= pr.html_url %>) | @<%= pr.user.login %>
+- <%= pr.title %> | [#<%= pr.number %>](<%= pr.html_url %>) | [@<%= pr.user.login %>](<%= pr.user.html_url %>)
 <% end -%>
 
 <% end -%>
