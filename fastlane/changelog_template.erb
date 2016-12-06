@@ -36,7 +36,7 @@
 <% release.data.each do |label, pull_requests| -%>
 **<%= labels_map[label.name] %>:**
 <% for pr in pull_requests -%>
-- <%= pr.title %> | [#<%= pr.number %>](<%= pr.html_url %>) | @<%= pr.user.login %>
+- <%= pr.title %> | [#<%= pr.number %>](<%= pr.html_url %>) | [@<%= pr.user.login %>](<%= pr.user.html_url %>)
 <% end -%>
 
 <% end -%>
