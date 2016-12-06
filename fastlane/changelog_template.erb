@@ -16,7 +16,7 @@
 
     # Reject pull requests with 'Skip Release Notes' label
     data.each do |label, prs|
-      prs.reject! {|pr| pr.label_ids.include?(skip_release_notes_label.id)}
+      prs.reject! {|pr| pr.label_ids.include?(skip_release_notes_label.id)} if skip_release_notes_label
     end
 
     # Update release with custom data
