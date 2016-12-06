@@ -2,7 +2,7 @@
   labels_map = {}
   labels_map['feature'] = 'Features'
   labels_map['bug'] = 'Bugs'
-  labels_map['optimization'] = 'Optimizations'
+  labels_map['enhancement'] = 'Enhancement'
 
   skip_release_notes_label = @labels.select {|label| label.name == "skip release notes" }.first
   changelog_url_base = "https://github.com/#{@params[:github_project]}/compare/"
