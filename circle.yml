@@ -7,4 +7,5 @@ dependencies:
     - git config user.email "$GIT_CONFIG_USER_EMAIL"
 test:
   override:
+    - bundle exec rake
     - bundle exec fastlane ci

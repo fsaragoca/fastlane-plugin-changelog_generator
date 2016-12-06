@@ -18,8 +18,8 @@ module Fastlane
         end
 
         labels, pull_requests = Helper::ChangelogGeneratorFetcher.fetch_labels(params[:github_project],
-                                  params[:base_branch],
-                                  params[:github_access_token])
+                                                                               params[:base_branch],
+                                                                               params[:github_access_token])
 
         releases = []
         if filter_by_tag

@@ -20,14 +20,10 @@ module Fastlane
         end
 
         # Sort by merged_at
-        pull_requests.sort_by! do |pr|
-          pr.merged_at
-        end
+        pull_requests.sort_by!(&:merged_at)
 
         # Uniq labels
-        labels = issues_map.values.map(&:labels).flatten.uniq do |label|
-          label.id
-        end
+        labels = issues_map.values.map(&:labels).flatten.uniq(&:id)
 
         # Add labels to pull requests
         pull_requests.each do |pr|

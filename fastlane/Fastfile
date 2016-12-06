@@ -5,12 +5,7 @@ end
 lane :ci do
   case git_branch
   when 'master'
-    generate_full_changelog
-    # Check if changelog file was modified
-    if `cd ../ && git ls-files -m`.split("\n").include?('CHANGELOG.md')
-      git_commit(path: './CHANGELOG.md', message: '[skip ci] Changelog update')
-      push_to_git_remote
-    end
+    ci_master
   end
 end
 
@@ -21,4 +16,13 @@ lane :generate_full_changelog do
                      filter_by_tag: false,
                      include_unreleased_section: true,
                      output_path: 'CHANGELOG.md')
+end
+
+private_lane :ci_master do
+  generate_full_changelog
+  # Check if changelog file was modified
+  if `cd ../ && git ls-files -m`.split("\n").include?('CHANGELOG.md')
+    git_commit(path: './CHANGELOG.md', message: '[skip ci] Changelog update')
+    push_to_git_remote
+  end
 end
