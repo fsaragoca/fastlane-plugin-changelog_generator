@@ -1,4 +1,19 @@
 lane :test do
+  generate_full_changelog
+end
+
+lane :ci do
+  case git_branch
+  when 'master'
+    generate_full_changelog
+    if `cd ../ && git ls-files -m`.split("\n").include?('CHANGELOG.md')
+      git_commit(path: './CHANGELOG.md', message: '[skip ci] Changelog update')
+      push_to_git_remote
+    end
+  end
+end
+
+lane :generate_full_changelog do
   generate_changelog(github_project: 'fsaragoca/fastlane-plugin-changelog_generator',
                      base_branch: 'master',
                      template_path: 'fastlane/changelog_template.erb',
