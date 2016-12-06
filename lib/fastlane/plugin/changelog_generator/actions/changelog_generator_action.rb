@@ -39,7 +39,7 @@ module Fastlane
             previous_tag = tag
           end
 
-          if params[:max_number_of_tags].nil? || tags.count < params[:max_number_of_tags]
+          if tags.count > 0 && (params[:max_number_of_tags].nil? || tags.count < params[:max_number_of_tags])
             releases << Helper::ChangelogGeneratorRelease.new(labels, pull_requests, nil, tags.last)
           end
         end
