@@ -1,6 +1,10 @@
-test:
-  override:
-    - bundle exec rake
 machine:
   ruby:
     version: 2.2.4
+dependencies:
+  pre:
+    - git config user.name "$GIT_CONFIG_USER_NAME"
+    - git config user.email "$GIT_CONFIG_USER_EMAIL"
+test:
+  override:
+    - bundle exec fastlane ci
