@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.author        = %q{Fernando Saragoca}
   spec.email         = %q{fsaragoca@me.com}
 
-  spec.summary       = %q{Generates changelogs based on merged pull requests & tags}
+  spec.summary       = %q{Changelog generation based on merged pull requests & tags}
   spec.homepage      = "https://github.com/fsaragoca/fastlane-plugin-changelog_generator"
   spec.license       = "MIT"
 

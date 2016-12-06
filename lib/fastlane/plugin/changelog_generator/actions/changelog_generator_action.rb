@@ -55,7 +55,7 @@ module Fastlane
       end
 
       def self.description
-        "Generates changelogs based on merged pull requests & tags"
+        "Changelog generation based on merged pull requests & tags"
       end
 
       def self.authors
@@ -63,12 +63,7 @@ module Fastlane
       end
 
       def self.return_value
-        # If your method provides a return value, you can describe here what it does
-      end
-
-      def self.details
-        # Optional:
-        "Fetches GitHub labels & pull requests to generate a changelog using git tags"
+        "Generated changelog"
       end
 
       def self.available_options
