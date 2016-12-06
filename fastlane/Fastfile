@@ -1,7 +1,5 @@
 lane :test do
-  access_token = params[:github_access_token]
   generate_changelog(github_project: 'fsaragoca/fastlane-plugin-changelog_generator',
-                     github_access_token: access_token,
                      base_branch: 'master',
                      template_path: 'fastlane/changelog_template.erb',
                      filter_by_tag: false,
