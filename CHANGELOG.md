@@ -2,6 +2,7 @@
 
 **Features:**
 - CI Setup | [#13](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/pull/13) | [@fsaragoca](https://github.com/fsaragoca)
+- Actions refactor & small improvements | [#19](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/pull/19) | [@fsaragoca](https://github.com/fsaragoca)
 
 **Bugs:**
 - Fix unknown 'skip release notes' | [#11](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/pull/11) | [@fsaragoca](https://github.com/fsaragoca)
