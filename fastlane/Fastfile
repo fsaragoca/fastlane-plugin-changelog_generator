@@ -1,25 +1,51 @@
-lane :test do
-  generate_full_changelog
+lane :test do |options|
+  option_full = 'Full'
+  option_single_release = 'Single Release'
+  option_both = 'Both'
+  options = [option_full, option_single_release, option_both]
+  changelog_type = UI.select('Select desired changelog type:', options)
+
+  case changelog_type
+  when option_full
+    changelog(type: :full)
+  when option_single_release
+    changelog(type: :single_release)
+  when option_both
+    changelog(type: :full)
+    changelog(type: :single_release)
+  end
 end
 
-lane :ci do
+lane :ci do |options|
   case git_branch
   when 'master'
     ci_master
   end
 end
 
-lane :generate_full_changelog do
-  generate_changelog(github_project: 'fsaragoca/fastlane-plugin-changelog_generator',
-                     base_branch: 'master',
-                     template_path: 'fastlane/changelog_template.erb',
-                     filter_by_tag: false,
-                     include_unreleased_section: true,
-                     output_path: 'CHANGELOG.md')
+lane :changelog do |options|
+  github_project = 'fsaragoca/fastlane-plugin-changelog_generator'
+  base_branch = 'master'
+  template_path = 'fastlane/changelog_template.erb'
+
+  case options[:type]
+  when :single_release
+    markdown = generate_release_changelog(github_project: github_project,
+                                          base_branch: base_branch,
+                                          template_path: template_path)
+    UI.message("\nGenerated changelog:\n\n" + markdown)
+  else
+    generate_changelog(github_project: github_project,
+                       base_branch: base_branch,
+                       template_path: template_path,
+                       include_unreleased_section: true,
+                       output_path: 'CHANGELOG.md')
+  end
 end
 
-private_lane :ci_master do
-  generate_full_changelog
+desc 'CI running on master branch'
+private_lane :ci_master do |options|
+  changelog(type: :full)
   # Check if changelog file was modified
   if `cd ../ && git ls-files -m`.split("\n").include?('CHANGELOG.md')
     git_commit(path: './CHANGELOG.md', message: '[skip ci] Changelog update')

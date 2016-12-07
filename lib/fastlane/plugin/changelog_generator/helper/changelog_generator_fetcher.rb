@@ -4,6 +4,8 @@ module Fastlane
   module Helper
     class ChangelogGeneratorFetcher
       def self.fetch_labels(project, base_branch, access_token)
+        Actions.verify_gem!('octokit')
+
         Octokit.auto_paginate = true
 
         issues_map = {}
