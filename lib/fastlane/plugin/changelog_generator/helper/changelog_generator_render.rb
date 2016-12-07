@@ -11,7 +11,7 @@ module Fastlane
 
       def to_markdown
         template = params[:template] || File.read(params[:template_path])
-        markdown = ERB.new(template, 0, '-').result(binding).strip
+        markdown = ERB.new(template, 0, '-').result(binding).strip.concat("\n")
         markdown
       end
     end
