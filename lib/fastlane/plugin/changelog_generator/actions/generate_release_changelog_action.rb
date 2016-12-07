@@ -20,7 +20,7 @@ module Fastlane
         no_tag_text = 'No tag'
 
         available_tags = `git tag --sort=taggerdate`.split("\n").reverse.first(10)
-        available_tags.reject! {|tag| excluded_tags.include?(tag)}
+        available_tags.reject! { |tag| excluded_tags.include?(tag) }
         available_tags << no_tag_text if allow_none
 
         if allow_none && available_tags.count == 1
