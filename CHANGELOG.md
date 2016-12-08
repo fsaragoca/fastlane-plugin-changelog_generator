@@ -12,6 +12,7 @@
 **Enhancement:**
 - Adds pull request link in changelog template | [#16](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/pull/16) | [@fsaragoca](https://github.com/fsaragoca)
 - RSpec && RuboCop | [#17](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/pull/17) | [@fsaragoca](https://github.com/fsaragoca)
+- Reusing tags logic with `git_tags` action | [#20](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/pull/20) | [@fsaragoca](https://github.com/fsaragoca)
 
 ## [v0.0.1] - 2016-12-06
 
