@@ -7,7 +7,7 @@ module Fastlane
                                                                  github_api_token: params[:github_api_token])
 
         tag_limit = params[:max_number_of_tags]
-        tags = git_tags(tag_limit)
+        tags = params[:tags] || other_action.git_tags(limit: tag_limit)
         releases = []
 
         # Unreleased section
@@ -17,26 +17,19 @@ module Fastlane
         end
 
         # Between tags sections
-        previous_tag = nil
-        tags.each do |tag|
-          if previous_tag
+        tags.each_with_index do |tag, idx|
+          if idx != 0
+            previous_tag = tags[idx - 1]
             releases << Helper::ChangelogGeneratorRelease.new(labels, pull_requests, previous_tag, tag)
           end
-          previous_tag = tag
         end
 
         # Last section
-        if tags.count > 0 && (tag_limit.nil? || tags.count < tag_limit)
+        if tags.count > 0 && params[:tags].nil? && (tag_limit.nil? || tags.count < tag_limit)
           releases << Helper::ChangelogGeneratorRelease.new(labels, pull_requests, nil, tags.last)
         end
 
         Helper::ChangelogGeneratorRender.new(releases, labels, params).to_markdown
-      end
-
-      def self.git_tags(limit)
-        tags = `git tag --sort=taggerdate`.split("\n").reverse
-        tags = tags.take(limit) if limit
-        tags
       end
 
       def self.description
@@ -70,6 +63,11 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :template_path,
                                        env_name: 'GENERATE_CHANGELOG_TEMPLATE_PATH',
                                        description: 'Contents of path will override `template` param',
+                                       optional: true),
+          FastlaneCore::ConfigItem.new(key: :tags,
+                                       env_name: 'GENERATE_CHANGELOG_TAGS',
+                                       description: 'Tags to generate changelog',
+                                       is_string: false,
                                        optional: true),
           FastlaneCore::ConfigItem.new(key: :max_number_of_tags,
                                        env_name: 'GENERATE_CHANGELOG_MAX_NUMBER_OF_TAGS',

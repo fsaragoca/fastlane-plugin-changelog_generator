@@ -12,6 +12,7 @@ module Fastlane
         labels = lane_context[SharedValues::GENERATE_CHANGELOG_GITHUB_LABELS]
         pull_requests = lane_context[SharedValues::GENERATE_CHANGELOG_GITHUB_PULL_REQUESTS]
         if labels && pull_requests
+          UI.important "Skipping API call because labels & pull requests are cached"
           return labels, pull_requests
         end
 

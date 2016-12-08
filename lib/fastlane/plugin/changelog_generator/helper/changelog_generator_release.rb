@@ -44,7 +44,18 @@ module Fastlane
       private
 
       def date_for_commit_with_tag(tag)
-        Time.parse(`git show -s --format=%ci $(git rev-list -n 1 #{tag})`.strip) if tag
+        # Return nil if no tag is provided
+        return nil if tag.nil?
+
+        # Return Time.now if tag is not found (new tag)
+        return Time.now if `git tag | grep #{tag}`.strip.length == 0
+
+        commit_for_tag = `git rev-list -n 1 #{tag}`.strip
+        # Return Time.now if commit for tag not found (new tag)
+        return Time.now if commit_for_tag.length == 0
+
+        # Return parsed date from tag commit
+        Time.parse(`git show -s --format=%ci #{commit_for_tag}`.strip)
       end
     end
   end
