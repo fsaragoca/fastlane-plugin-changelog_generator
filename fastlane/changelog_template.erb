@@ -11,16 +11,22 @@
     # Reject releases where label is not included in labels_map
     data = release.data.reject {|label, prs| !labels_map[label.name]}
 
-    # Sort releases by label
-    data = data.sort_by {|label, prs| labels_map.keys.index(label.name)}
-
     # Reject pull requests with 'Skip Release Notes' label
     data.each do |label, prs|
       prs.reject! {|pr| pr.label_ids.include?(skip_release_notes_label.id)} if skip_release_notes_label
     end
 
+    # Reject labels with no pull requests
+    data = data.reject {|label, prs| prs.count == 0}
+
+    # Sort releases by label
+    sorted_data = {}
+    data.keys.sort_by {|label| labels_map.keys.index(label.name)}.each do |label|
+      sorted_data[label] = data[label]
+    end
+
     # Update release with custom data
-    release.data = data
+    release.data = sorted_data
   end
 
   # Reject unreleased section if no data is available && is unreleased section
