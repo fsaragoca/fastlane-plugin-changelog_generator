@@ -19,7 +19,7 @@ module Fastlane
         # Between tags sections
         tags.each_with_index do |tag, idx|
           if idx != 0
-            previous_tag = tags[idx-1]
+            previous_tag = tags[idx - 1]
             releases << Helper::ChangelogGeneratorRelease.new(labels, pull_requests, previous_tag, tag)
           end
         end
