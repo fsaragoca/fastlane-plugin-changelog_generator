@@ -7,7 +7,7 @@ module Fastlane
                                                                  github_api_token: params[:github_api_token])
 
         tag_limit = params[:max_number_of_tags]
-        tags = git_tags(tag_limit)
+        tags = other_action.git_tags(limit: tag_limit)
         releases = []
 
         # Unreleased section
@@ -31,12 +31,6 @@ module Fastlane
         end
 
         Helper::ChangelogGeneratorRender.new(releases, labels, params).to_markdown
-      end
-
-      def self.git_tags(limit)
-        tags = `git tag --sort=taggerdate`.split("\n").reverse
-        tags = tags.take(limit) if limit
-        tags
       end
 
       def self.description
