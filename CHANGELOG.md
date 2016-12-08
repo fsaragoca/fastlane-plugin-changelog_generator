@@ -1,4 +1,5 @@
-## [Unreleased]
+## [v0.1.0] - 2016-12-08
+[Full Changelog](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/compare/v0.0.1...v0.1.0)
 
 **Features:**
 - CI Setup | [#13](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/pull/13) | [@fsaragoca](https://github.com/fsaragoca)
