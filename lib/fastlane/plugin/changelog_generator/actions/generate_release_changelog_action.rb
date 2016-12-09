@@ -8,9 +8,7 @@ module Fastlane
           tag_b = prompt_tag("Please enter second tag: ", [tag_a], true)
         end
 
-        labels, pull_requests = other_action.fetch_github_labels(github_project: params[:github_project],
-                                                                 base_branch: params[:base_branch],
-                                                                 github_api_token: params[:github_api_token])
+        labels, pull_requests = Helper::ChangelogGeneratorFetcher.fetch_github_data(params, lane_context)
 
         release = Helper::ChangelogGeneratorRelease.new(labels, pull_requests, tag_b, tag_a)
         Helper::ChangelogGeneratorRender.new([release], labels, params).to_markdown
