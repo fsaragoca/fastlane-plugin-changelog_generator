@@ -7,7 +7,7 @@ module Fastlane
                                                                  github_api_token: params[:github_api_token])
 
         tag_limit = params[:max_number_of_tags]
-        tags = params[:tags] || other_action.git_tags(limit: tag_limit)
+        tags = params[:tags] || Helper::ChangelogGeneratorHelper.git_tags(tag_limit)
         releases = []
 
         # Unreleased section
