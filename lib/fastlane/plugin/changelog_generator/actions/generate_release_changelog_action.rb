@@ -8,9 +8,7 @@ module Fastlane
           tag_b = prompt_tag("Please enter second tag: ", [tag_a], true)
         end
 
-        labels, pull_requests = other_action.fetch_github_labels(github_project: params[:github_project],
-                                                                 base_branch: params[:base_branch],
-                                                                 github_api_token: params[:github_api_token])
+        labels, pull_requests = Helper::ChangelogGeneratorFetcher.fetch_github_data(params, lane_context)
 
         release = Helper::ChangelogGeneratorRelease.new(labels, pull_requests, tag_b, tag_a)
         Helper::ChangelogGeneratorRender.new([release], labels, params).to_markdown
@@ -18,10 +16,16 @@ module Fastlane
 
       def self.prompt_tag(message = '', excluded_tags = [], allow_none = false)
         no_tag_text = 'No tag'
+        other_tag_text = 'Enter tag manually'
+        tag_limit = 10
 
-        available_tags = other_action.git_tags(limit: 10)
+        available_tags = Helper::ChangelogGeneratorHelper.git_tags
         available_tags.reject! { |tag| excluded_tags.include?(tag) }
+        tags_count = available_tags.count
+
+        available_tags = available_tags.take(tag_limit)
         available_tags << no_tag_text if allow_none
+        available_tags << other_tag_text if tags_count > tag_limit
 
         if allow_none && available_tags.count == 1
           UI.important("Skiping second tag because there are no tags available.")
@@ -30,6 +34,7 @@ module Fastlane
 
         tag = UI.select(message, available_tags)
         tag = nil if tag == no_tag_text
+        tag = UI.input('Tag: ') if tag == other_tag_text
         tag
       end
 

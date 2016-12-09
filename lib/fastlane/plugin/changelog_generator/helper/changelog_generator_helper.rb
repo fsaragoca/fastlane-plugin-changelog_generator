@@ -1,11 +1,10 @@
 module Fastlane
   module Helper
     class ChangelogGeneratorHelper
-      # class methods that you define here become available in your action
-      # as `Helper::ChangelogGeneratorHelper.your_method`
-      #
-      def self.show_message
-        UI.message("Hello from the changelog_generator plugin helper!")
+      def self.git_tags(limit = nil)
+        tags = `git tag --sort=taggerdate`.split("\n").reverse
+        tags = tags.take(limit) if limit
+        tags
       end
     end
   end

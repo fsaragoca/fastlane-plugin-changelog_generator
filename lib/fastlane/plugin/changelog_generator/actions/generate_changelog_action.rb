@@ -2,12 +2,10 @@ module Fastlane
   module Actions
     class GenerateChangelogAction < Action
       def self.run(params)
-        labels, pull_requests = other_action.fetch_github_labels(github_project: params[:github_project],
-                                                                 base_branch: params[:base_branch],
-                                                                 github_api_token: params[:github_api_token])
+        labels, pull_requests = Helper::ChangelogGeneratorFetcher.fetch_github_data(params, lane_context)
 
         tag_limit = params[:max_number_of_tags]
-        tags = params[:tags] || other_action.git_tags(limit: tag_limit)
+        tags = params[:tags] || Helper::ChangelogGeneratorHelper.git_tags(tag_limit)
         releases = []
 
         # Unreleased section
