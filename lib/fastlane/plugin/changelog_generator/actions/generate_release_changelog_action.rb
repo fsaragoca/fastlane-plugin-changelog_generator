@@ -16,10 +16,16 @@ module Fastlane
 
       def self.prompt_tag(message = '', excluded_tags = [], allow_none = false)
         no_tag_text = 'No tag'
+        other_tag_text = 'Enter tag manually'
+        tag_limit = 10
 
         available_tags = Helper::ChangelogGeneratorHelper.git_tags
         available_tags.reject! { |tag| excluded_tags.include?(tag) }
+        tags_count = available_tags.count
+
+        available_tags = available_tags.take(tag_limit)
         available_tags << no_tag_text if allow_none
+        available_tags << other_tag_text if tags_count > tag_limit
 
         if allow_none && available_tags.count == 1
           UI.important("Skiping second tag because there are no tags available.")
@@ -28,6 +34,7 @@ module Fastlane
 
         tag = UI.select(message, available_tags)
         tag = nil if tag == no_tag_text
+        tag = UI.input('Tag: ') if tag == other_tag_text
         tag
       end
 
