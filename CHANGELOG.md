@@ -1,3 +1,8 @@
+## [Unreleased]
+
+**Enhancement:**
+- Refactoring actions & tags | [#22](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/pull/22) | [@fsaragoca](https://github.com/fsaragoca)
+
 ## [v0.1.0] - 2016-12-08
 [Full Changelog](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/compare/v0.0.1...v0.1.0)
 
