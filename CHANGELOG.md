@@ -1,4 +1,5 @@
-## [Unreleased]
+## [v0.2.0] - 2016-12-09
+[Full Changelog](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/compare/v0.1.0...v0.2.0)
 
 **Enhancement:**
 - Refactoring actions & tags | [#22](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/pull/22) | [@fsaragoca](https://github.com/fsaragoca)
