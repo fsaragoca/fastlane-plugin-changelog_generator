@@ -15,7 +15,11 @@ fastlane add_plugin changelog_generator
 
 ## About changelog_generator
 
-Changelog generation based on merged pull requests & tags.
+|                   |  changelog_generator  |
+|-------------------|-----------------------|
+| :book:            | Generate a [changelog](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/blob/master/CHANGELOG.md) based on git tags & pull requests
+| :pencil2:         | Flexible configuration using a fully customisable [template file](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/blob/master/fastlane/changelog_template.erb)
+| :page_with_curl:  | Full access to [pull request information](https://developer.github.com/v3/pulls/#get-a-single-pull-request) directly from template
 
 ## Example
 
