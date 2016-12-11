@@ -30,16 +30,20 @@ lane :changelog do |options|
 
   case options[:type]
   when :single_release
-    markdown = generate_release_changelog(github_project: github_project,
-                                          base_branch: base_branch,
-                                          template_path: template_path)
+    markdown = generate_release_changelog(
+      github_project: github_project,
+      base_branch: base_branch,
+      template_path: template_path
+    )
     UI.message("\nGenerated changelog:\n\n" + markdown)
   else
-    generate_changelog(github_project: github_project,
-                       base_branch: base_branch,
-                       template_path: template_path,
-                       include_unreleased_section: true,
-                       output_path: 'CHANGELOG.md')
+    generate_changelog(
+      github_project: github_project,
+      base_branch: base_branch,
+      template_path: template_path,
+      include_unreleased_section: true,
+      output_path: 'CHANGELOG.md'
+    )
   end
 end
 
