@@ -1,6 +1,9 @@
 # changelog_generator plugin
 
 [![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-changelog_generator)
+[![Twitter: @fsaragoca](https://img.shields.io/badge/contact-@fsaragoca-blue.svg?style=flat)](https://twitter.com/fsaragoca)
+
+[![CircleCI](https://circleci.com/gh/fsaragoca/fastlane-plugin-changelog_generator.svg?style=svg)](https://circleci.com/gh/fsaragoca/fastlane-plugin-changelog_generator)
 
 ## Getting Started
 
