@@ -23,7 +23,41 @@ fastlane add_plugin changelog_generator
 
 ## Example
 
-Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plugin. Try it by cloning the repo, running `fastlane install_plugins` and `bundle exec fastlane test`.
+This project automatically generates [`CHANGELOG.md`](CHANGELOG.md) when pushing changes to `master`, check out [`Fastfile`](fastlane/Fastfile) and [`changelog_template.erb`](fastlane/changelog_template.erb) for project setup. Try it by cloning the repo, running `fastlane install_plugins` and `bundle exec fastlane test`.
+
+## Actions
+
+### :book: generate_changelog
+
+```
+changelog = generate_changelog(
+  github_project: 'fsaragoca/fastlane-plugin-changelog_generator',
+  github_api_token: 'GITHUB_API_TOKEN',
+  base_branch: 'master',
+  template_path: 'fastlane/changelog_template.erb',
+  template: 'YOUR_ERB_TEMPLATE', # Must provide either template or template_path
+  tags: ['v0.2.0', 'v0.1.0'], # Optional, defaults to all git tags
+  max_number_of_tags: 10, # Optional, limits number of tags when using all git tags
+  include_unreleased_section: true, # Optional, defaults to false
+  output_path: 'CHANGELOG.md' # Optional
+)
+```
+
+### :ship: generate_release_changelog
+
+```
+v2_changelog = generate_release_changelog(
+  github_project: 'fsaragoca/fastlane-plugin-changelog_generator',
+  github_api_token: 'GITHUB_API_TOKEN',
+  base_branch: 'master',
+  template_path: 'fastlane/changelog_template.erb',
+  template: 'YOUR_ERB_TEMPLATE', # Must provide either template or template_path
+  tag_a: 'v0.2.0',
+  tag_b: 'v0.1.0', # Optional, will be prompted if not provided
+  skip_tag_b: true, # Optional, defaults to false
+  output_path: 'RELEASE_0.2.0.md' # Optional
+)
+```
 
 ## Run tests for this plugin
 
