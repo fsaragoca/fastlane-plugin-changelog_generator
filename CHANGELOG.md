@@ -1,4 +1,5 @@
-## [Unreleased]
+## [v0.2.1] - 2016-12-14
+[Full Changelog](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/compare/v0.2.0...v0.2.1)
 
 **Bugs:**
 - Fix sorting tags by commit date | [#24](https://github.com/fsaragoca/fastlane-plugin-changelog_generator/pull/24) | [@fsaragoca](https://github.com/fsaragoca)
